@@ -46,10 +46,10 @@ public class Clock : Ticker
 	}
 
 	/// <summary>
-	/// This gets called when the GameObject first gets set up.
+	/// This gets called when the GameObject gets turned on.
 	/// Do initialization here.
 	/// </summary>
-	private void Awake()
+	private void OnEnable()
 	{
 		Reset();
 	}
