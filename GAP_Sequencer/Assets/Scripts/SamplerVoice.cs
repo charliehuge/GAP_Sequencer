@@ -5,7 +5,6 @@ using System.Collections;
 public class SamplerVoice : MonoBehaviour
 {
 	private AudioSource _audioSource;
-	private uint _samplesUntilEnvelopeTrigger;
 
 	public void Play(AudioClip audioClip, float pitch, double startTime)
 	{
