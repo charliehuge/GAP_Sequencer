@@ -53,6 +53,8 @@
   <ItemGroup>
      <Compile Include="Assets\Scripts\Clock.cs" />
      <Compile Include="Assets\Scripts\KeyController.cs" />
+     <Compile Include="Assets\Scripts\MusicController.cs" />
+     <Compile Include="Assets\Scripts\NoteProbability.cs" />
      <Compile Include="Assets\Scripts\Sampler.cs" />
      <Compile Include="Assets\Scripts\SamplerVoice.cs" />
      <Compile Include="Assets\Scripts\Sequencer.cs" />

@@ -20,6 +20,8 @@ public class Sequencer : Ticker
 		public int Octave;
 	}
 
+	public bool suspended;
+
 	// The "Ticker" we want to listen to (a Clock or another Sequencer)
 	[SerializeField] private Ticker _ticker;
 
@@ -72,7 +74,7 @@ public class Sequencer : Ticker
 		Step step = _steps[_currentTick];
 
 		// if the current step is active, send a tick through
-		if (step.Active)
+		if (step.Active && !suspended)
 		{
 			if (_keyController != null)
 			{
