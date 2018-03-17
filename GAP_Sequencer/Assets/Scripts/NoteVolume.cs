@@ -1,8 +1,16 @@
 ﻿using UnityEngine;
 
-public class NoteProbability : Ticker 
+public class NoteVolume : Ticker 
 {
-	[Range(0.0f, 1.0f)] public float probability;
+	public enum Mode
+	{
+		Set,
+		Multiply,
+		Add
+	}
+
+	[Range(0.0f, 1.0f)] public float volume;
+	public Mode mode;
 
 	// The "Ticker" we want to listen to
 	[SerializeField] private Ticker _ticker;
@@ -27,11 +35,20 @@ public class NoteProbability : Ticker
 
 	public void HandleTicked(double tickTime, int midiNoteNumber, float volume)
 	{
-		// roll the dice to see if we should play this note
-		float rand = UnityEngine.Random.value;
-		if (rand < probability)
+		float newVolume = 0.0f;
+		switch (mode)
 		{
-			DoTick(tickTime, midiNoteNumber, volume);
+		case Mode.Set:
+			newVolume = this.volume;
+			break;
+		case Mode.Multiply:
+			newVolume = this.volume * volume;
+			break;
+		case Mode.Add:
+			newVolume = this.volume + volume;
+			break;
 		}
+
+		DoTick(tickTime, midiNoteNumber, newVolume);
 	}
 }

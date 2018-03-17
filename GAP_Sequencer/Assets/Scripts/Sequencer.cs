@@ -18,6 +18,8 @@ public class Sequencer : Ticker
 		public int ScaleTone;
 		[Range(-1, 8)]
 		public int Octave;
+		[Range(0.0f, 1.0f)]
+		public float Volume;
 	}
 
 	public bool suspended;
@@ -61,7 +63,7 @@ public class Sequencer : Ticker
 	/// </summary>
 	/// <param name="tickTime">Tick time.</param>
 	/// <param name="midiNoteNumber">Midi note number.</param>
-	public void HandleTicked(double tickTime, int midiNoteNumber)
+	public void HandleTicked(double tickTime, int midiNoteNumber, float volume)
 	{
 		int numSteps = _steps.Count;
 
@@ -81,7 +83,7 @@ public class Sequencer : Ticker
 				midiNoteNumber = _keyController.GetMIDINote(step.ScaleTone, 
 															step.Octave);
 			}
-			DoTick(tickTime, midiNoteNumber);
+			DoTick(tickTime, midiNoteNumber, step.Volume);
 		}
 
 		// increment and wrap the tick counter

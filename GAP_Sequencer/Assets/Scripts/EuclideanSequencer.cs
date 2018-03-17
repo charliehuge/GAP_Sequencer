@@ -1,8 +1,12 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
-public class NoteProbability : Ticker 
+public class EuclideanSequencer : Ticker 
 {
-	[Range(0.0f, 1.0f)] public float probability;
+	[Range(1, 16)] public int steps = 16;
+	[Range(1, 16)] public int triggers = 4;
+
+	private int _currentStep;
 
 	// The "Ticker" we want to listen to
 	[SerializeField] private Ticker _ticker;
@@ -27,11 +31,16 @@ public class NoteProbability : Ticker
 
 	public void HandleTicked(double tickTime, int midiNoteNumber, float volume)
 	{
-		// roll the dice to see if we should play this note
-		float rand = UnityEngine.Random.value;
-		if (rand < probability)
+		if (IsStepOn(_currentStep, steps, triggers))
 		{
 			DoTick(tickTime, midiNoteNumber, volume);
 		}
+
+		_currentStep = (_currentStep + 1) % steps;
+	}
+
+	private static bool IsStepOn(int step, int numSteps, int numTriggers)
+	{
+		return (step * numTriggers) % numSteps < numTriggers;
 	}
 }

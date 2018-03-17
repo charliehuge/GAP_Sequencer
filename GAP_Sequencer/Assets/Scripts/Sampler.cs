@@ -46,10 +46,10 @@ public class Sampler : MonoBehaviour
 		}
 	}
 
-	private void HandleTicked(double tickTime, int midiNoteNumber)
+	private void HandleTicked(double tickTime, int midiNoteNumber, float volume)
 	{
 		float pitch = MidiNoteToPitch(midiNoteNumber);
-		_samplerVoices[_nextVoiceIndex].Play(_audioClip, pitch, tickTime);
+		_samplerVoices[_nextVoiceIndex].Play(_audioClip, pitch, tickTime, volume);
 
 		_nextVoiceIndex = (_nextVoiceIndex + 1) % _samplerVoices.Length;
 	}
